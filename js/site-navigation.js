@@ -46,3 +46,9 @@
   new ResizeObserver(schedule).observe(document.querySelector('#projects'));
   update();
 })();
+
+// Keep the selected section when switching languages.
+document.querySelector('.language-switch')?.addEventListener('click', function () {
+  const section = location.hash || document.querySelector('.w-nav-link.is-section-active')?.getAttribute('href');
+  this.href = this.getAttribute('href').split('#')[0] + (section || '');
+});
