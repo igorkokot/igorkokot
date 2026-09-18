@@ -82,3 +82,7 @@
 /* Match the album cover to the video preview proportions. */
 .portfolio-year img[src="images/sick7-warp-weft.jpg"] { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; object-position: center; border-radius: 10px; }
 .portfolio-year .div-block:has(img[src="images/sick7-warp-weft.jpg"]) { align-self: center; }
+
+.navbar .w-nav-link { color: #222; }
+.navbar .w-nav-link.is-section-active { color: #0082f3; }
+.pending-project-link { cursor: default; opacity: .65; }
