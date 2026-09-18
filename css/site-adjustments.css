@@ -1,0 +1,84 @@
+.igor-kokot---logo { color: inherit; text-decoration: none; }
+.igor-kokot---logo:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }
+.about-me-container { padding-left: 20px; padding-right: 20px; }
+.about-me-heading, .about-me-paragraph { padding-left: 0; padding-right: 0; }
+#portfolio, #contact { scroll-margin-top: var(--nav-height, 64px); }
+
+/* Consistent project rows and a muted year panel on the right. */
+.portfolio-year {
+  grid-template: "projects year" / minmax(0, 2fr) minmax(100px, 1fr);
+  align-items: stretch;
+  gap: 30px;
+}
+.portfolio-year > .left-div {
+  grid-area: projects;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  width: 100%;
+  min-width: 0;
+  padding-left: 0;
+}
+.portfolio-year > .container-4 {
+  grid-area: year;
+  background-color: var(--year-color);
+  min-width: 0;
+}
+.portfolio-year .year-heading { position: sticky; top: calc(var(--nav-height, 60px) + 20px); margin: 40px 0; }
+.portfolio-year .div-block { min-width: 0; overflow-wrap: anywhere; }
+.portfolio-year .image---pulse { width: 100%; height: auto; }
+.portfolio-year-empty { grid-column: 1 / -1; padding: 30px 10px; margin: 0; color: #ccc; font-size: 18px; }
+@media (max-width: 767px) {
+  .portfolio-year { gap: 12px; grid-template-columns: minmax(0, 1fr) 90px; }
+  .portfolio-year > .left-div { grid-template-columns: minmax(0, 1fr); }
+  .portfolio-year .year-heading { font-size: 28px; }
+}
+
+/* Center the contact card and keep the form inside narrow screens. */
+#contact.form-block {
+  justify-self: center;
+  width: min(100%, 520px);
+  margin-inline: auto;
+  padding: 24px;
+  box-sizing: border-box;
+}
+#contact .form { width: 100%; margin: 0; }
+#contact .project-title { text-align: center; }
+#contact .button { width: 100%; }
+#contact textarea { min-height: 140px; resize: vertical; }
+.contact-direct { margin: 16px 0 0; color: #333; text-align: center; overflow-wrap: anywhere; }
+.contact-direct a { color: #0d0d40; }
+.project-video { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; border: 0; border-radius: 10px; }
+.portfolio-year .project-entry {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+}
+.project-entry > .client { grid-column: 1 / -1; padding: 10px; margin: 0; }
+@media (max-width: 767px) {
+  .portfolio-year .project-entry { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Vertically center video previews beside each project's text and link. */
+.portfolio-year .div-block:has(> .project-video) {
+  align-self: center;
+}
+.portfolio-year .div-block:has(+ .div-block > .project-video) {
+  align-self: center;
+}
+
+.portfolio-year + .portfolio-year {
+  border-top: 1px solid rgba(228, 235, 243, .3);
+  margin-top: 28px;
+  padding-top: 28px;
+}
+
+.video-preview { position: relative; overflow: hidden; background: #101010; }
+.video-play { display: block; position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; cursor: pointer; background: #101010; color: white; }
+.video-play img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.video-play-icon { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 12px 22px; border-radius: 12px; background: #c00; color: white; font-size: 24px; line-height: 1; }
+.video-play:focus-visible { outline: 3px solid white; outline-offset: -4px; }
+.video-preview iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* Match the album cover to the video preview proportions. */
+.portfolio-year img[src="images/sick7-warp-weft.jpg"] { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; object-position: center; border-radius: 10px; }
+.portfolio-year .div-block:has(img[src="images/sick7-warp-weft.jpg"]) { align-self: center; }
