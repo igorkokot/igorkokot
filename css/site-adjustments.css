@@ -90,3 +90,14 @@
 .project-thumbnail { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; object-position: center; border-radius: 10px; }
 .portfolio-year .project-still,
 .portfolio-year .div-block:has(+ .project-still) { align-self: center; }
+
+.navbar-container { display: flex; align-items: center; }
+.navbar-container::before, .navbar-container::after { display: none; }
+.navbar-container > .w-nav-menu { margin-left: auto; }
+.navbar-container > .w-nav-button { margin-left: auto; }
+.language-switch { display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0; padding: 8px; margin-right: 12px; border-radius: 6px; color: #222; text-decoration: none; font-size: 13px; line-height: 20px; }
+.language-switch:hover, .language-switch:focus-visible { color: #0082f3; background: #ffffff80; }
+@media (max-width: 479px) {
+  .igor-kokot---logo { padding: 16px 10px; font-size: 21px; }
+  .language-switch { margin-right: 0; padding: 6px; }
+}
