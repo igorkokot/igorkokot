@@ -86,3 +86,7 @@
 .navbar .w-nav-link { color: #222; }
 .navbar .w-nav-link.is-section-active { color: #0082f3; }
 .pending-project-link { cursor: default; opacity: .65; }
+
+.project-thumbnail { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; object-position: center; border-radius: 10px; }
+.portfolio-year .project-still,
+.portfolio-year .div-block:has(+ .project-still) { align-self: center; }
