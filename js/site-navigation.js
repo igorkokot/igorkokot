@@ -19,3 +19,30 @@
     window.scrollTo({ top: Math.max(0, top), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
   });
 })();
+
+// Track the section at the reading position independently of Webflow's hash state.
+(() => {
+  const navbar = document.querySelector('.navbar');
+  const links = [...navbar.querySelectorAll('.w-nav-link')];
+  const portfolio = document.querySelector('#portfolio');
+  const contact = document.querySelector('#contact');
+  let scheduled = false;
+  const update = () => {
+    scheduled = false;
+    const line = navbar.getBoundingClientRect().height + 2;
+    const atBottom = window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+    const active = contact.getBoundingClientRect().top <= Math.max(line, window.innerHeight * 0.65) || atBottom ? '#contact' : portfolio.getBoundingClientRect().top <= line ? '#portfolio' : '#top';
+    links.forEach(link => {
+      const selected = link.getAttribute('href') === active;
+      link.classList.toggle('is-section-active', selected);
+      if (selected) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  const schedule = () => { if (!scheduled) { scheduled = true; requestAnimationFrame(update); } };
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  window.addEventListener('pageshow', schedule);
+  new ResizeObserver(schedule).observe(document.querySelector('#projects'));
+  update();
+})();
