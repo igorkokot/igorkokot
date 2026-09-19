@@ -33,17 +33,17 @@
 }
 
 /* Center the contact card and keep the form inside narrow screens. */
-#contact.form-block {
+.contact-card.form-block {
   justify-self: center;
   width: min(100%, 520px);
   margin-inline: auto;
   padding: 24px;
   box-sizing: border-box;
 }
-#contact .form { width: 100%; margin: 0; }
-#contact .project-title { text-align: center; }
-#contact .button { width: 100%; }
-#contact textarea { min-height: 140px; resize: vertical; }
+.contact-card .form { width: 100%; margin: 0; }
+.contact-card .project-title { text-align: center; }
+.contact-card .button { width: 100%; }
+.contact-card textarea { min-height: 140px; resize: vertical; }
 .contact-direct { margin: 16px 0 0; color: #333; text-align: center; overflow-wrap: anywhere; }
 .contact-direct a { color: #0d0d40; }
 .project-video { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; border: 0; border-radius: 10px; }
@@ -117,3 +117,31 @@ html[lang="pl"] body *:not([class^="w-icon-"]):not([class*=" w-icon-"]) { font-f
 @media (prefers-reduced-motion: reduce) {
   .navbar .w-nav-link, .language-switch { transition: none; }
 }
+
+/* One shared content edge for the header, introduction, filters and every year. */
+:root { --content-width: 1240px; --page-gutter: 20px; }
+.navbar-container,
+.about-me-container,
+.portfolio-filters,
+.year-container,
+.contact-section {
+  width: calc(100% - 2 * var(--page-gutter));
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: 0;
+}
+#projects { border: 0; }
+.portfolio-year > .left-div,
+.portfolio-year .project-entry { column-gap: 20px; }
+.portfolio-year .div-block,
+.project-entry > .client { padding-inline: 0; }
+.navbar-container > .igor-kokot---logo { order: -1; padding-left: 0; }
+@media (min-width: 992px) {
+  .navbar-container > .w-nav-menu { display: flex; gap: 40px; }
+  .navbar .w-nav-link { padding-inline: 0; }
+}
+.contact-section { margin-top: 40px; margin-bottom: 40px; }
+@media (max-width: 479px) {
+  :root { --page-gutter: 16px; }
+}
+
