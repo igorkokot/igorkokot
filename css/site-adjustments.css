@@ -101,3 +101,19 @@
   .igor-kokot---logo { padding: 16px 10px; font-size: 21px; }
   .language-switch { margin-right: 0; padding: 6px; }
 }
+
+/* Polish typography uses the same family as project headings. */
+html[lang="pl"] body,
+html[lang="pl"] body *:not([class^="w-icon-"]):not([class*=" w-icon-"]) { font-family: Inconsolata, monospace; }
+
+.language-switch { margin-left: 12px; margin-right: 0; }
+.navbar .w-nav-link,
+.language-switch { border-radius: 6px; transition: color .18s ease, background-color .18s ease, box-shadow .18s ease; }
+.navbar .w-nav-link:hover,
+.navbar .w-nav-link:focus-visible,
+.language-switch:hover,
+.language-switch:focus-visible { color: #0082f3; background-color: #ffffff80; box-shadow: inset 0 0 0 1px #0082f340; }
+.navbar .w-nav-link.is-section-active { color: #0082f3; }
+@media (prefers-reduced-motion: reduce) {
+  .navbar .w-nav-link, .language-switch { transition: none; }
+}
