@@ -166,4 +166,21 @@ html[lang="pl"] body *:not([class^="w-icon-"]):not([class*=" w-icon-"]) { font-f
 .project-separator { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 14px; margin: 12px 10px; color: #a0a7ae; font-size: 12px; }
 .project-separator::before, .project-separator::after { content: ""; flex: 1; height: 1px; background: #ffffff20; }
 .project-separator[hidden] { display: none; }
-#projects > .year-container:has(#contact) { border-top: 1px solid #ffffff50; margin-top: 28px; padding-top: 36px; }
+#projects > .year-container:has(#contact) { border-top: 1px solid rgba(228, 235, 243, .3); border-radius: 0; margin-top: 28px; padding-top: 36px; }
+
+/* Section dividers share the subtle line and content width of year dividers. */
+.footer-divider-two {
+  width: calc(100% - 2 * var(--page-gutter));
+  max-width: var(--content-width);
+  height: 1px;
+  margin-inline: auto;
+  background-color: rgba(228, 235, 243, .3);
+  border: 0;
+  border-radius: 0;
+}
+.footer-light { padding-inline: 0; border: 0; }
+.footer-container {
+  width: calc(100% - 2 * var(--page-gutter));
+  max-width: var(--content-width);
+}
+.footer-container .footer-divider-two { width: 100%; }
