@@ -21,9 +21,13 @@
       return { element, projects };
     }).filter(year => year.element.classList.contains('portfolio-year'));
 
-  const labels = {"sound-on-set":"Sound on set","audio-postproduction":"Audio postproduction","music":"Music composition","production":"Podcast production","music-production":"Music production","sound-design":"Sound design","voiceover-postproduction":"Voiceover postproduction","mixing":"Mixing","mastering":"Mastering","video-editing":"Video editing","artwork":"Artwork","animation":"Animation","music-video":"Music videos"};
-  const polishLabels = {"All":"Wszystkie","sound-on-set":"Dźwięk na planie","audio-postproduction":"Postprodukcja dźwięku","music":"Komponowanie muzyki","production":"Produkcja podcastów","music-production":"Produkcja muzyczna","sound-design":"Projektowanie dźwięku","voiceover-postproduction":"Postprodukcja nagrań lektorskich","mixing":"Miks","mastering":"Mastering","video-editing":"Montaż wideo","artwork":"Oprawa graficzna","animation":"Animacja","music-video":"Teledyski"};
-  const categories = new Set(years.flatMap(year => year.projects.flatMap(project => project.services)));
+  const labels = {"uncategorized":"Uncategorized","sound-on-set":"Sound on set","audio-postproduction":"Audio postproduction","music":"Film scoring","production":"Podcast production","music-production":"Music production","sound-design":"Sound design","voiceover-postproduction":"Voiceover postproduction","mixing":"Mixing","mastering":"Mastering","video-editing":"Video editing","artwork":"Artwork","animation":"Animation","music-video":"Music videos"};
+  const polishLabels = {"uncategorized":"Bez kategorii","All":"Wszystkie","sound-on-set":"Dźwięk na planie","audio-postproduction":"Postprodukcja dźwięku","music":"Muzyka do filmu","production":"Produkcja podcastów","music-production":"Produkcja muzyczna","sound-design":"Projektowanie dźwięku","voiceover-postproduction":"Postprodukcja nagrań lektorskich","mixing":"Miks","mastering":"Mastering","video-editing":"Montaż wideo","artwork":"Oprawa graficzna","animation":"Animacja","music-video":"Teledyski"};
+  const projects = years.flatMap(year => year.projects);
+  const categories = new Set([...projects.flatMap(project => project.services), 'uncategorized']);
+  const matches = (project, category) => category === 'uncategorized'
+    ? project.services.length === 0 : project.services.includes(category);
+  const counts = new Map([...categories].map(category => [category, projects.filter(project => matches(project, category)).length]));
   const buttons = filters.querySelector('.portfolio-filter-buttons');
   const status = filters.querySelector('.portfolio-filter-status');
 
@@ -32,7 +36,7 @@
     years.forEach(year => {
       let visible = 0;
       year.projects.forEach(project => {
-        const show = category === 'All' || project.services.includes(category);
+        const show = category === 'All' || matches(project, category);
         project.elements.forEach(element => { element.hidden = !show; });
         project.separator.hidden = !show || visible === 0;
         if (show) visible++;
@@ -47,7 +51,7 @@
     status.textContent = `${count} ${noun}`;
   }
 
-  ['All', ...[...categories].sort((a, b) => ((polish ? polishLabels[a] : labels[a]) || a).localeCompare((polish ? polishLabels[b] : labels[b]) || b, polish ? 'pl' : 'en'))].forEach(category => {
+  ['All', ...[...categories].sort((a, b) => counts.get(b) - counts.get(a) || ((polish ? polishLabels[a] : labels[a]) || a).localeCompare((polish ? polishLabels[b] : labels[b]) || b, polish ? 'pl' : 'en'))].forEach(category => {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'portfolio-filter';
