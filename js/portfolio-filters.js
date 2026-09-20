@@ -16,14 +16,14 @@
         separator.setAttribute('aria-hidden', 'true');
         separator.textContent = '♦';
         entry.before(separator);
-        return { category: label.dataset.category || label.textContent.trim(), elements: [entry, image].filter(Boolean), separator };
+        return { services: (card.querySelector('[data-services]')?.dataset.services || '').split(' ').filter(Boolean), elements: [entry, image].filter(Boolean), separator };
       });
       return { element, projects };
     }).filter(year => year.element.classList.contains('portfolio-year'));
 
-  const labels = { Movie: 'Movies', Music: 'Music', Podcast: 'Podcast', Video: 'Video', Animation: 'Animation', 'Music Video': 'Music Video' };
-  const polishLabels = { All: 'Wszystkie', Movie: 'Filmy', Music: 'Muzyka', Podcast: 'Podcasty', Video: 'Wideo', Animation: 'Animacja', 'Music Video': 'Teledyski' };
-  const categories = new Set(years.flatMap(year => year.projects.map(project => project.category)));
+  const labels = {"sound-on-set":"Sound on set","audio-postproduction":"Audio postproduction","music":"Music composition","production":"Podcast production","music-production":"Music production","sound-design":"Sound design","voiceover-postproduction":"Voiceover postproduction","mixing":"Mixing","mastering":"Mastering","video-editing":"Video editing","artwork":"Artwork","animation":"Animation","music-video":"Music videos"};
+  const polishLabels = {"All":"Wszystkie","sound-on-set":"Dźwięk na planie","audio-postproduction":"Postprodukcja dźwięku","music":"Komponowanie muzyki","production":"Produkcja podcastów","music-production":"Produkcja muzyczna","sound-design":"Projektowanie dźwięku","voiceover-postproduction":"Postprodukcja nagrań lektorskich","mixing":"Miks","mastering":"Mastering","video-editing":"Montaż wideo","artwork":"Oprawa graficzna","animation":"Animacja","music-video":"Teledyski"};
+  const categories = new Set(years.flatMap(year => year.projects.flatMap(project => project.services)));
   const buttons = filters.querySelector('.portfolio-filter-buttons');
   const status = filters.querySelector('.portfolio-filter-status');
 
@@ -32,7 +32,7 @@
     years.forEach(year => {
       let visible = 0;
       year.projects.forEach(project => {
-        const show = category === 'All' || project.category === category;
+        const show = category === 'All' || project.services.includes(category);
         project.elements.forEach(element => { element.hidden = !show; });
         project.separator.hidden = !show || visible === 0;
         if (show) visible++;
