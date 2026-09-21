@@ -184,3 +184,12 @@ html[lang="pl"] body *:not([class^="w-icon-"]):not([class*=" w-icon-"]) { font-f
   max-width: var(--content-width);
 }
 .footer-container .footer-divider-two { width: 100%; }
+
+/* Keep the introduction justified and service lists left aligned. */
+.about-me-paragraph:not(.about-me-paragraph---start) { text-align: left; }
+
+/* A compact first contact form; visitors can expand the message field. */
+#intro-contact.contact-card { padding: 16px 24px; }
+#intro-contact .project-title { font-size: 24px; line-height: 1.2; margin-top: 0; margin-bottom: 16px; }
+#intro-contact textarea { min-height: 58px; height: 58px; line-height: 20px; padding: 8px 12px; box-sizing: border-box; }
+#intro-contact .contact-direct { margin-top: 12px; }
